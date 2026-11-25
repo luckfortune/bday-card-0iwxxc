@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#07061a">
+<title>一封信</title>
+<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'GateWK';src:url(font.woff2) format('woff2');font-display:swap}
+html,body{margin:0;height:100%;background:#06051a;color:#efeaff;font-family:GateWK,"PingFang SC","Microsoft YaHei",serif;overflow:hidden;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+body{display:flex;align-items:center;justify-content:center}
+#bg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.box{position:relative;margin-top:6vh;width:min(310px,84vw);text-align:center;transition:opacity 1.1s ease,transform 1.1s ease,filter 1.1s ease;animation:rise 1.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.box{z-index:2}
+#veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:#07061a;opacity:0;transition:opacity 1.1s ease}
+.box.go .ttl,.box.go .sub,.box.go .card,.box.go .snd-tip,.box.go .hint{opacity:0!important;filter:blur(7px);transform:translateY(12px);transition:opacity .8s ease,filter .8s ease,transform .9s ease}
+.box.go .card{transition-delay:.05s}.box.go .snd-tip,.box.go .hint{transition-delay:0s}.box.go .sub{transition-delay:.12s}.box.go .ttl{transition-delay:.2s}
+.box.go .orb::before{animation:none;opacity:1;transform:scale(1.65);transition:transform 1.3s cubic-bezier(.3,0,.2,1),opacity 1s}
+.box.go .orb::after{opacity:0;animation:none}
+.box.go .star svg{transform:scale(1.5);filter:drop-shadow(0 0 10px rgba(255,235,200,1)) drop-shadow(0 0 30px rgba(255,200,140,.9));transition:transform 1.3s cubic-bezier(.3,0,.2,1),filter 1s}
+.star svg{transition:transform .3s}
+.wave{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:1.5px solid rgba(255,226,180,.9);box-shadow:0 0 20px rgba(255,210,150,.6),inset 0 0 20px rgba(255,210,150,.4);opacity:0;pointer-events:none}
+.box.go .wave{animation:wave 1.3s cubic-bezier(.2,.6,.3,1) .5s both}
+.box.go .wave.w2{animation-delay:.72s;border-color:rgba(200,180,255,.7)}
+@keyframes wave{0%{transform:scale(.3);opacity:0}15%{opacity:1}100%{transform:scale(5);opacity:0}}
+/* 中心的光：一颗会呼吸的星 */
+.orb{position:relative;width:120px;height:120px;margin:0 auto 34px}
+.orb::before{content:'';position:absolute;inset:-40px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,150,.42) 0%,rgba(255,170,140,.16) 28%,rgba(150,120,255,.10) 52%,transparent 70%);animation:breath 4.2s ease-in-out infinite}
+.orb::after{content:'';position:absolute;left:50%;top:50%;width:118px;height:118px;margin:-59px 0 0 -59px;border-radius:50%;border:1px solid rgba(255,225,180,.16);animation:halo 4.2s ease-out infinite}
+.star{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;animation:spin 18s linear infinite}
+.star svg{width:100%;height:100%;filter:drop-shadow(0 0 6px rgba(255,220,160,.95)) drop-shadow(0 0 18px rgba(255,190,130,.6))}
+@keyframes breath{0%,100%{transform:scale(.92);opacity:.75}50%{transform:scale(1.08);opacity:1}}
+@keyframes halo{0%{transform:scale(.55);opacity:0}25%{opacity:.8}100%{transform:scale(1.35);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ttl{font-size:clamp(26px,7.2vw,32px);letter-spacing:.32em;padding-left:.32em;margin-top:2px;
+  background:linear-gradient(100deg,#f4e8ff 0%,#ffd9a8 35%,#fff6e6 50%,#ffd9a8 65%,#f4e8ff 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s ease-in-out infinite;text-shadow:0 0 28px rgba(255,200,150,.18)}
+@keyframes sheen{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.sub{font-size:11px;letter-spacing:.55em;padding-left:.55em;color:#f3dcbc;opacity:.78;margin:12px 0 28px}
+.card{padding:22px 20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));border:1px solid rgba(255,235,210,.14);box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.lbl{font-size:12px;letter-spacing:.5em;padding-left:.5em;opacity:.78;margin-bottom:14px}
+input{width:100%;box-sizing:border-box;padding:13px 16px;border-radius:999px;border:1px solid rgba(233,230,255,.22);background:rgba(10,8,34,.86);color:#fff8ee;font-family:inherit;font-size:18px;letter-spacing:.45em;text-align:center;outline:none;transition:border-color .4s,box-shadow .4s}
+input::placeholder{color:rgba(255,230,200,.35);letter-spacing:.3em}
+input:focus{border-color:rgba(255,220,170,.75);box-shadow:0 0 0 1px rgba(255,225,180,.25),0 0 18px rgba(255,200,140,.18)}
+#b{position:relative;overflow:hidden;margin-top:14px;width:100%;padding:12px;border-radius:999px;border:1px solid rgba(255,214,160,.55);background:linear-gradient(180deg,rgba(255,206,150,.42),rgba(220,150,120,.22));color:#fff6e8;text-shadow:0 1px 6px rgba(90,40,20,.35);font-family:inherit;font-size:15px;letter-spacing:.6em;padding-left:calc(12px + .6em);cursor:pointer;box-shadow:0 0 24px rgba(255,190,130,.16)}
+#b::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,250,235,.45),transparent);transform:skewX(-20deg);animation:glint 3.8s ease-in-out 1.2s infinite}
+@keyframes glint{0%{left:-60%}40%,100%{left:130%}}
+#b:active{transform:scale(.98)}#b:disabled{opacity:.6}
+.err{min-height:0;margin-top:0;transition:margin .3s;font-size:12.5px;color:#ffb8cc;letter-spacing:.12em}
+.snd-tip{margin-top:18px;font-size:12px;letter-spacing:.3em;padding-left:.3em;color:#ffe3bd;opacity:.72;display:flex;align-items:center;justify-content:center;gap:8px}
+.snd-tip i{display:inline-flex;gap:2px;align-items:flex-end;height:11px}
+.snd-tip i b{display:block;width:2px;background:#ffd9a8;border-radius:1px;animation:eq 1.1s ease-in-out infinite}
+.snd-tip i b:nth-child(2){animation-delay:.18s}.snd-tip i b:nth-child(3){animation-delay:.36s}.snd-tip i b:nth-child(4){animation-delay:.54s}
+@keyframes eq{0%,100%{height:3px}50%{height:11px}}
+.hint{height:16px;margin-top:8px;font-size:11px;letter-spacing:.25em;opacity:.5;transition:opacity .8s}
+#snd{position:fixed;right:14px;top:12px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,230,200,.25);background:rgba(20,16,50,.35);color:#ffe9c8;font-size:15px;padding:0;opacity:.85;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#snd.off{opacity:.4;text-decoration:line-through}
+.shake{animation:sh .4s}@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="veil"></div>
+<form class="box" id="f" autocomplete="off">
+  <div class="orb"><i class="wave"></i><i class="wave w2"></i><div class="star"><svg viewBox="0 0 64 64"><defs><radialGradient id="sg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fffaf0"/><stop offset=".45" stop-color="#ffe2b0"/><stop offset="1" stop-color="#ffc98a"/></radialGradient></defs><path fill="url(#sg)" d="M32 2C34 22 42 30 62 32C42 34 34 42 32 62C30 42 22 34 2 32C22 30 30 22 32 2Z"/><path fill="#fff" opacity=".85" d="M32 18C33 28 36 31 46 32C36 33 33 36 32 46C31 36 28 33 18 32C28 31 31 28 32 18Z"/></svg></div></div>
+  <div class="ttl" id="ttl">一封信</div>
+  <div class="sub">HAPPY BIRTHDAY</div>
+  <div class="card">
+    <div class="lbl">请输入密码</div>
+    <input id="p" type="password" inputmode="numeric" maxlength="12" autocomplete="off" aria-label="密码" placeholder="· · · ·">
+    <button id="b" type="submit">打开</button>
+    <div class="err" id="e"></div>
+  </div>
+  <div class="snd-tip"><i><b></b><b></b><b></b><b></b></i>建议打开声音</div>
+  <div class="hint" id="h">轻触屏幕开启音乐</div>
+</form>
+<button id="snd" type="button" aria-label="声音">♪</button>
+<script>
+(()=>{
+// 卡片数据：cards/<id>.json（密文 + 收信人称呼）；贺卡引擎 engine.html 是公开的，所有卡片共用
+const ID=(new URLSearchParams(location.search).get('c')||location.hash.slice(1)||'').replace(/[^a-z0-9]/gi,'');
+let D=null;const ENG=fetch('engine.html').then(r=>r.text()).catch(()=>null);
+const DL=ID?fetch('cards/'+ID+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null):Promise.resolve(null);
+DL.then(d=>{D=d;const t=document.getElementById('ttl');if(!d){t.textContent='找不到这封信';document.querySelector('.card').style.display='none';document.querySelector('.snd-tip').textContent='请检查链接是否完整';return}if(d.to){t.textContent='致'+d.to;document.title='致'+d.to}if(d.len)p.placeholder='· '.repeat(d.len).trim()});
+const AU={lullaby:"audio/lullaby.mp3",mbox:"audio/mbox.mp3",twinkle:"audio/twinkle.mp3",tap:"audio/tap.mp3"};
+const u=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const $=id=>document.getElementById(id), f=$('f'),p=$('p'),b=$('b'),e=$('e');
+// 夜空：星云、会闪的十字星、缓慢飘升的金色光尘、偶尔一颗流星
+let CR=null,GO=0,GC=null;function cr(){const r=document.querySelector('.card').getBoundingClientRect(),m=14;CR=[(r.left-m)*DPR,(r.top-m)*DPR,(r.right+m)*DPR,(r.bottom+m)*DPR]}
+const SP=[];const cv=$('bg'),cx=cv.getContext('2d');let W,H,DPR,ST=[],DU=[],NEB=null,SH=null,nextSh=2500;
+function spr(c,a){const s=document.createElement('canvas');s.width=s.height=64;const x=s.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba('+c+',1)');g.addColorStop(a,'rgba('+c+',.35)');g.addColorStop(1,'rgba('+c+',0)');x.fillStyle=g;x.fillRect(0,0,64,64);return s}
+const SW=spr('255,255,255',.18),SG=spr('255,214,160',.22),SV=spr('180,160,255',.25);
+function rs(){DPR=Math.min(devicePixelRatio||1,2);W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
+  NEB=document.createElement('canvas');NEB.width=W;NEB.height=H;const x=NEB.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#05041a');g.addColorStop(.6,'#0b0828');g.addColorStop(1,'#140c30');x.fillStyle=g;x.fillRect(0,0,W,H);
+  const blob=(px,py,r,c)=>{const q=x.createRadialGradient(px,py,0,px,py,r);q.addColorStop(0,c);q.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=q;x.fillRect(0,0,W,H)};
+  x.globalCompositeOperation='lighter';
+  blob(W*.72,H*.18,Math.max(W,H)*.55,'rgba(92,60,210,.22)');blob(W*.18,H*.78,Math.max(W,H)*.5,'rgba(60,44,170,.18)');
+  blob(W*.5,H*.46,Math.min(W,H)*.55,'rgba(255,170,120,.10)');blob(W*.5,H*1.05,Math.max(W,H)*.45,'rgba(170,80,170,.12)');
+  x.globalCompositeOperation='source-over';
+  const r=Math.random;ST=[];const n=Math.min(320,W*H/(5200*DPR*DPR));
+  for(let i=0;i<n;i++){let x=r()*W,y=r()*H;const cxw=Math.min(W*.46,200*DPR);if(Math.abs(x-W/2)<cxw&&Math.abs(y-H/2)<260*DPR&&r()<.85)continue;const big=r()<.06;ST.push({x,y,s:(big?1.6+r()*1.6:Math.pow(r(),3)*1.4+.4)*DPR,ph:r()*6.3,w:.5+r()*1.8,big,c:r()<.15})}
+  DU=[];for(let i=0;i<70;i++)DU.push(dust(true))}
+function dust(init){const r=Math.random;let x=r()*W;const cxw=Math.min(W*.42,180*DPR);if(Math.abs(x-W/2)<cxw)x=x<W/2?x-cxw:x+cxw;return{x,y:init?r()*H:H+20*DPR,vy:-(6+r()*14)*DPR,vx:(r()-.5)*4*DPR,s:(.6+Math.pow(r(),2)*2.4)*DPR,ph:r()*6.3,a:.25+r()*.6,g:r()<.7}}
+rs();addEventListener('resize',()=>{if(window.__gone)return;rs();cr()});setTimeout(cr,50);setTimeout(()=>{if(!window.__gone)cr()},1700);
+let last=performance.now();
+(function lp(t){const dt=Math.min(.05,(t-last)/1000);last=t;
+  cx.globalCompositeOperation='source-over';cx.globalAlpha=1;cx.drawImage(NEB,0,0);
+  cx.globalCompositeOperation='lighter';
+  for(const s of ST){const tw=.5+.5*Math.sin(t/1000*s.w+s.ph),a=.2+.75*tw*tw;
+    if(s.big){const R=s.s*7*(.75+.4*tw);cx.globalAlpha=a*.55;cx.drawImage(s.c?SG:SW,s.x-R,s.y-R,R*2,R*2);
+      cx.globalAlpha=a*.7;cx.fillStyle=s.c?'#ffe4bd':'#f2efff';const L=s.s*9*(.6+.5*tw),w=Math.max(.6*DPR,s.s*.32);cx.fillRect(s.x-L,s.y-w/2,L*2,w);cx.fillRect(s.x-w/2,s.y-L,w,L*2)}
+    else{cx.globalAlpha=a*.85;cx.fillStyle=s.c?'#ffe4bd':'#e8e6ff';cx.fillRect(s.x,s.y,s.s,s.s)}}
+  for(let i=0;i<DU.length;i++){const d=DU[i];if(GO&&GC){const k=Math.min(1,(t-GO)/900),dx=GC[0]-d.x,dy=GC[1]-d.y;d.x+=dx*Math.min(1,dt*(1+5*k*k));d.y+=dy*Math.min(1,dt*(1+5*k*k));if(dx*dx+dy*dy<(14*DPR)**2){d.a*=.8}}else{d.x+=d.vx*dt+Math.sin(t/1700+d.ph)*.15*DPR;d.y+=d.vy*dt;if(d.y<-20*DPR)DU[i]=dust(false);}
+    const R=d.s*5;const inC=CR&&d.x>CR[0]&&d.x<CR[2]&&d.y>CR[1]&&d.y<CR[3];cx.globalAlpha=d.a*(.55+.45*Math.sin(t/600+d.ph))*(inC?.12:1);cx.drawImage(d.g?SG:SV,d.x-R,d.y-R,R*2,R*2)}
+  if(!SH&&t>nextSh&&!GO){const r=Math.random;SH={x:W*(.25+r()*.7),y:H*(.05+r()*.3),vx:-(520+r()*300)*DPR,vy:(170+r()*120)*DPR,life:0,max:.9+r()*.4};nextSh=t+5000+r()*6000}
+  if(SH){SH.life+=dt;const k=SH.life/SH.max,a=Math.sin(Math.PI*Math.min(1,k));const x0=SH.x+SH.vx*SH.life,y0=SH.y+SH.vy*SH.life,len=.16;
+    const g=cx.createLinearGradient(x0,y0,x0-SH.vx*len,y0-SH.vy*len);g.addColorStop(0,'rgba(255,240,220,'+(.9*a)+')');g.addColorStop(1,'rgba(255,240,220,0)');
+    cx.globalAlpha=1;cx.strokeStyle=g;cx.lineWidth=1.6*DPR;cx.beginPath();cx.moveTo(x0,y0);cx.lineTo(x0-SH.vx*len,y0-SH.vy*len);cx.stroke();
+    cx.globalAlpha=a;cx.drawImage(SW,x0-8*DPR,y0-8*DPR,16*DPR,16*DPR);if(k>=1)SH=null}
+  // 输入时从输入框溅出的小光点
+  for(let i=SP.length-1;i>=0;i--){const q=SP[i];q.life+=dt;q.vy+=40*DPR*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;if(q.life>q.max){SP.splice(i,1);continue}
+    const R=q.s*(1-q.life/q.max)*5;cx.globalAlpha=1-q.life/q.max;cx.drawImage(SG,q.x-R,q.y-R,R*2,R*2)}
+  if(!window.__gone)requestAnimationFrame(lp)})(performance.now());
+function sparkAt(el,n){const r=el.getBoundingClientRect();for(let i=0;i<n;i++){const a=-Math.PI/2+(Math.random()-.5)*2.2,v=(40+Math.random()*90)*DPR;SP.push({x:(r.left+r.width*(.3+Math.random()*.4))*DPR,y:(r.top+r.height*.5)*DPR,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:0,max:.6+Math.random()*.6,s:(.8+Math.random()*1.4)*DPR})}}
+// 声音：解锁后交给贺卡继续用（同一个 AudioContext，音乐不断）
+const HB=window.__HB={C:null,master:null,buf:{},music:null};let muted=false,started=false,ready=null;
+function dec(u){return fetch(u).then(r=>r.arrayBuffer()).then(ab=>new Promise(r=>{try{HB.C.decodeAudioData(ab,r,()=>r(null))}catch(x){r(null)}})).catch(()=>null)}
+// 一打开页面就建好音频、解码音乐并尝试播放；浏览器不允许自动出声时，第一次触碰屏幕（任何地方）立刻开始
+const AC=window.AudioContext||window.webkitAudioContext;
+if(AC){const C=HB.C=new AC();HB.master=C.createGain();HB.master.gain.value=1;
+  const cp=C.createDynamicsCompressor();cp.threshold.value=-14;cp.ratio.value=2.5;HB.master.connect(cp);cp.connect(C.destination);
+  ready=Promise.all(['lullaby','mbox','twinkle','tap'].map(k=>dec(AU[k]).then(bf=>HB.buf[k]=bf))).then(()=>{
+    const l=HB.buf.lullaby;if(!l)return;const s=C.createBufferSource();s.buffer=l;s.loop=true;const g=C.createGain();g.gain.value=0;s.connect(g);g.connect(HB.master);s.start();HB.music={src:s,g};
+    fadeIn();try{C.resume()}catch(x){}if(C.state==='running'&&$('h'))$('h').style.opacity=0});
+  C.onstatechange=()=>{if(window.__gone)return;if(C.state==='running'){fadeIn();const h=$('h');if(h)h.style.opacity=0}};
+}else ready=Promise.resolve();
+let faded=false;function fadeIn(){if(faded||!HB.music||HB.C.state!=='running')return;faded=true;const g=HB.music.g.gain,t=HB.C.currentTime;g.cancelScheduledValues(t);g.setValueAtTime(0,t);g.linearRampToValueAtTime(.6,t+1.5)}
+function ensure(){if(HB.C&&HB.C.state!=='running'){try{HB.C.resume()}catch(x){}}return ready}
+document.addEventListener('WeixinJSBridgeReady',ensure,false);if(window.WeixinJSBridge)ensure();
+function snd(name,rate=1,gain=.35,when=0){const C=HB.C,bf=HB.buf[name];if(!C||!bf)return;const s=C.createBufferSource();s.buffer=bf;s.playbackRate.value=rate;const g=C.createGain();g.gain.value=gain;s.connect(g);g.connect(HB.master);s.start(C.currentTime+when)}
+const R=n=>Math.pow(2,(n-82.23)/12);
+function first(){if(started)return;started=true;ensure()}
+['pointerdown','touchstart','keydown','click'].forEach(ev=>addEventListener(ev,e=>{if(e.target&&e.target.id==='snd')return;first()},{passive:true,capture:true}));
+p.addEventListener('focus',first);
+// 输入密码：很轻的敲击声
+p.addEventListener('input',()=>{snd('tap',.9+Math.random()*.2,.1);sparkAt(p,4)});
+$('snd').addEventListener('click',async()=>{started=true;await ensure();muted=!muted;HB.master.gain.setValueAtTime(muted?0:1,HB.C.currentTime);$('snd').classList.toggle('off',muted);HB.muted=muted});
+f.addEventListener('submit',async ev=>{
+  ev.preventDefault(); if(!p.value) return; first(); if(!D){e.textContent='信还在路上，请稍等一下再试';return;}
+  if(!window.crypto||!crypto.subtle){e.textContent='请用 Chrome / Safari 等浏览器打开';return;}
+  b.disabled=true; b.textContent='解锁中…'; e.textContent='';
+  try{
+    const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(p.value.trim().normalize('NFKC')),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:u(D.s),iterations:D.n,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+    const card=new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:u(D.i)},key,u(D.c)));let eng=await ENG;if(!eng)throw new Error('engine');const ST='<'+'script>',k0=eng.indexOf(ST);const html=eng.slice(0,k0)+ST+'window.__CARD='+card.replace(/</g,'\\u003c')+';<'+'/script>'+eng.slice(k0);
+    snd('mbox',R(91),.1);snd('mbox',R(98),.07,.12);snd('mbox',R(103),.05,.5);sparkAt(b,18);
+    const sv=document.querySelector('.star svg'),r0=sv.getBoundingClientRect();GC=[(r0.left+r0.width/2)*DPR,(r0.top+r0.height/2)*DPR];GO=performance.now();
+    f.classList.add('go');$('snd').style.transition='opacity .6s';$('snd').style.opacity=0;
+    setTimeout(()=>{$('veil').style.opacity=1},450);
+    await new Promise(r=>setTimeout(r,1050));
+    const r1=sv.getBoundingClientRect(),dm=new DOMMatrix(getComputedStyle(document.querySelector('.star')).transform);
+    HB.star={x:r1.left+r1.width/2,y:r1.top+r1.height/2,s:document.querySelector('.star').offsetWidth*1.5,rot:Math.atan2(dm.b,dm.a)*180/Math.PI};
+    window.__gone=1;
+    document.open(); document.write(html); document.close();
+  }catch(x){
+    b.disabled=false; b.textContent='打开'; e.textContent=x&&x.message==='engine'?'网络不太好，请刷新重试':'密码不对，再试一次';e.style.marginTop='12px'; snd('tap',.7,.12);snd('tap',.65,.1,.11);
+    f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake'); p.select();
+  }
+});
+})();
+</script>
+</body>
+</html>
